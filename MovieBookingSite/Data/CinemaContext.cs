@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MovieBookingSite.Data
 {
-    public class MovieContext :DbContext
+    public class CinemaContext :DbContext
     {
-        public MovieContext(DbContextOptions<MovieContext> options)
+        public CinemaContext(DbContextOptions<CinemaContext> options)
             : base(options) { }
 
         public DbSet<Movie> Movies { get; set; }

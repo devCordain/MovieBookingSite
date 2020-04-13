@@ -27,7 +27,7 @@ namespace MovieBookingSite
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<MovieContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MovieContext")));
+            services.AddDbContext<CinemaContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MovieContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

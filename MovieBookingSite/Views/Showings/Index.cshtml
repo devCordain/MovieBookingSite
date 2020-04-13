@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MovieBookingSite.Showing>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Only good StarWars Movies allowed</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ShowTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketPrice)
+            </th>
+            <th>
+                Tickets left
+            </th>
+            <th>
+                Buy Ticket
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShowTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Movie.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketPrice)
+            </td>
+            <td>
+                @{var TicketsLeft = item.TicketsLeft();}
+                @TicketsLeft
+            </td>
+            <td>
+                <a asp-action="Buy" asp-route-id="@item.Id">Buy Ticket</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

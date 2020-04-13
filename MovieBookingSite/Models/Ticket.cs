@@ -10,11 +10,11 @@ namespace MovieBookingSite
     {
         public int Id { get; set; }
 
-        public virtual Showing Showing { get; set; }
-
         public int Row { get; set; }
 
         public int SeatOnRow { get; set; }
+
+        public bool Available { get; set; }
     }
 }
 

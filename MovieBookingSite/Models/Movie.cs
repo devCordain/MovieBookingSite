@@ -12,12 +12,10 @@ namespace MovieBookingSite
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public double Length { get; set; }
+        public int Length { get; set; }
 
+        public string Director { get; set; }
         public string Description { get; set; }
-
-        [Display(Name = "Age Limit")]
-        public int? AgeLimit { get; set; }
 
         [Display(Name = "Release Date")]
         [DataType(DataType.Date)]
