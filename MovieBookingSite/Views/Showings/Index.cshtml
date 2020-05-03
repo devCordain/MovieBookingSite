@@ -1,49 +1,72 @@
 ﻿@model IEnumerable<MovieBookingSite.Showing>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Tickets";
 }
 
-<h1>Only good StarWars Movies allowed</h1>
-<table class="table">
-    <thead>
+<table class="table table-responsive table-striped">
+    <thead class="thead-dark">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ShowTime)
+                @Html.DisplayNameFor(model => model.Movie.ImageThumbnail)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movie.Name)
+                @Html.ActionLink(Html.DisplayNameFor(model => model.Movie.Name), "Index", new { sortOrder = "name" })
+            </th>
+            <th>
+                @Html.ActionLink(Html.DisplayNameFor(model => model.ShowTime), "Index", new { sortOrder = "time" })
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salon.Name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TicketPrice)
             </th>
             <th>
-                Tickets left
+                @Html.ActionLink(Html.DisplayNameFor(model => model.TicketsLeft), "Index", new { sortOrder = "tickets" })
             </th>
             <th>
-                Buy Ticket
+                Buy Tickets
             </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model)
 {
-        <tr>
+        <tr class="@(item.TicketsLeft <= 0 ? "bg-danger":"")">
             <td>
-                @Html.DisplayFor(modelItem => item.ShowTime)
+                @{ 
+                    var base64 = Convert.ToBase64String(item.Movie.ImageThumbnail);
+                    var imgSrc = string.Format("data:image.jpg;base64, {0}", base64);
+                }
+                <img class="d-block w-100 h-50 rounded" src="@imgSrc" alt="@item.Movie.Name" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Movie.Name)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.ShowTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salon.Name)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.TicketPrice)
             </td>
             <td>
-                @{var TicketsLeft = item.TicketsLeft();}
-                @TicketsLeft
+                @Html.DisplayFor(modelItem => item.TicketsLeft)
             </td>
             <td>
-                <a asp-action="Buy" asp-route-id="@item.Id">Buy Ticket</a>
+                @{ 
+                    if (item.TicketsLeft > 0)
+                    {
+                        @Html.ActionLink("Buy tickets", "Buy", "Showings", new { id = item.Id });
+                    }
+                    else
+                    {
+                        @:Full
+                    }
+                }
             </td>
         </tr>
 }

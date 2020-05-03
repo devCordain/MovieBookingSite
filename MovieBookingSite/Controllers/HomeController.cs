@@ -5,27 +5,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MovieBookingSite.Data;
 using MovieBookingSite.Models;
 
 namespace MovieBookingSite.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly CinemaContext _context;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, CinemaContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult Admin()
-        {
-            return View();
+            return View(_context.Movies);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -9,7 +9,7 @@ namespace MovieBookingSite
     public class Salon
     {
         public int Id { get; set; }
-
+        [Display(Name = "Salon Name")]
         public string Name { get; set; }
         public string Description { get; set; }
 

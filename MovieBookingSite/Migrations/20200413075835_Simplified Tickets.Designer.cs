@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieBookingSite.Data;
 
 namespace MovieBookingSite.Migrations
 {
     [DbContext(typeof(CinemaContext))]
-    partial class CinemaContextModelSnapshot : ModelSnapshot
+    [Migration("20200413075835_Simplified Tickets")]
+    partial class SimplifiedTickets
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,12 +33,6 @@ namespace MovieBookingSite.Migrations
 
                     b.Property<string>("Director")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("ImageLarge")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<byte[]>("ImageThumbnail")
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("Length")
                         .HasColumnType("int");
@@ -107,32 +103,6 @@ namespace MovieBookingSite.Migrations
                     b.ToTable("Showings");
                 });
 
-            modelBuilder.Entity("MovieBookingSite.Ticket", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Available")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Row")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Seat")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ShowingId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ShowingId");
-
-                    b.ToTable("Ticket");
-                });
-
             modelBuilder.Entity("MovieBookingSite.Showing", b =>
                 {
                     b.HasOne("MovieBookingSite.Movie", "Movie")
@@ -142,13 +112,6 @@ namespace MovieBookingSite.Migrations
                     b.HasOne("MovieBookingSite.Salon", "Salon")
                         .WithMany()
                         .HasForeignKey("SalonId");
-                });
-
-            modelBuilder.Entity("MovieBookingSite.Ticket", b =>
-                {
-                    b.HasOne("MovieBookingSite.Showing", null)
-                        .WithMany("Tickets")
-                        .HasForeignKey("ShowingId");
                 });
 #pragma warning restore 612, 618
         }

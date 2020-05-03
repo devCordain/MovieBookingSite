@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\20200407103612_intitial.Designer.cs" />
     <Compile Remove="Migrations\20200412082022_UpdateTicketShwings.cs" />
     <Compile Remove="Migrations\20200412082022_UpdateTicketShwings.Designer.cs" />
+    <Compile Remove="Migrations\20200502152342_displayname.cs" />
+    <Compile Remove="Migrations\20200502152342_displayname.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +21,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+    <PackageReference Include="QRCoder" Version="1.3.9" />
   </ItemGroup>
 
 

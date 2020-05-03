@@ -5,28 +5,77 @@
 }
 
 <h1>Buy Tickets</h1>
-
-<h4>@Html.DisplayNameFor(model => model.Movie.Name)</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form asp-action="Buy">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="Tickets" class="control-label"></label>
-                <input asp-for="Tickets" class="form-control" />
-                <span asp-validation-for="Tickets" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label>Tickets to buy</label>
+                <select name="numberOfTickets">
+                    @for (int i = 1; i <= 12; i++)
+                    {
+                        if (i <= Model.TicketsLeft)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    }
+                </select>
+                <input type="submit" value="Buy" class="btn btn-primary" />
             </div>
         </form>
+    </div>
+    <div class="d-md-block col-md-12">
+        <table class="table table-responsive">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.Movie.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.Movie.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.ShowTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.Salon.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.TicketPrice)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @{
+                            var base64 = Convert.ToBase64String(Model.Movie.ImageThumbnail);
+                            var imgSrc = string.Format("data:image.jpg;base64, {0}", base64);
+                        }
+                        <img class="d-block img-fluid rounded" src="@imgSrc" alt="@Model.Movie.Name" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(item => Model.Movie.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(item => Model.ShowTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(item => Model.Salon.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(item => Model.TicketPrice)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to list</a>
 </div>
 
 @section Scripts {

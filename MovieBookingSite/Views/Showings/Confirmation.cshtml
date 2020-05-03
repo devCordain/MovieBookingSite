@@ -1,0 +1,21 @@
+﻿@model MovieBookingSite.Showing
+
+@{
+    ViewData["Title"] = "Thank you";
+}
+
+<h1>Confirmation</h1>
+<hr />
+<p>Thank you for purchasing @ViewBag.NumberOfTickets tickets to @ViewBag.Movie in @ViewBag.Salon starting at @ViewBag.ShowTime</p>
+@{ 
+    var imgSrc = string.Format("data:image.jpg;base64, {0}", ViewBag.QRImage);
+}
+<h3>Confirmation QR Code</h3>
+<img class="d-block col-md-4 img-fluid rounded" src="@imgSrc" alt="Confirmation QR Code" />
+<div>
+    <a asp-action="Index">Back to Showings</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

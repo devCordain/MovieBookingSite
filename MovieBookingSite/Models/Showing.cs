@@ -1,4 +1,5 @@
-﻿using MovieBookingSite.Data;
+﻿using Microsoft.AspNetCore.Authentication;
+using MovieBookingSite.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,21 +17,24 @@ namespace MovieBookingSite
 
         public virtual Salon Salon { get; set; }
 
-        public virtual List<Ticket> Tickets { get; set; }
+        public int TicketsLeft { get; set; }
 
         [Display(Name = "Show Time")]
         public DateTime ShowTime { get; set; }
 
         public int TicketPrice { get; set; }
 
-        public int TicketsLeft()
+        public virtual IList<Ticket> Tickets { get; set; }
+
+        public void SeedSeats()
         {
-            var ticketsLeft = Salon.Rows * Salon.SeatsPerRow;
-            foreach (var ticket in Tickets)
+            for (int row = 1; row < Salon.Rows; row++)
             {
-                if (!ticket.Available) ticketsLeft--;
+                for (int seat = 1; seat < Salon.SeatsPerRow; seat++)
+                {
+                    Tickets.Add(new Ticket { Row = row, Seat = seat });
+                }
             }
-            return ticketsLeft;
         }
     }
 }

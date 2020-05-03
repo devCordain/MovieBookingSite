@@ -12,6 +12,14 @@ a {
   color: #0366d6;
 }
 
+.bg {
+    background-image:url("~/Images/stars.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
@@ -59,8 +67,8 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
 .footer {
   position: absolute;
